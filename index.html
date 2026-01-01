@@ -1,23 +1,348 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <!-- Schema.org LocalBusiness 마크업(JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MovingCompany",
+    "name": "전국 20평대 포장이사 전문",
+    "image": "https://도메인/로고.png",
+    "url": "https://도메인/20평대이사비용",
+    "telephone": "031-123-4567",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "경기도 평택시 ○○로 ○○",
+      "addressLocality": "평택시",
+      "addressRegion": "경기",
+      "postalCode": "17900",
+      "addressCountry": "KR"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "전국"
+    },
+    "priceRange": "₩₩₩",
+    "description": "20평대 이사 비용 비교, 24평 25평 26평 포장이사 가격, 체크리스트, 전국 이사 업체 정보 제공."
+  }
+  </script>
+
+  <!-- Google Fonts for Noto Sans KR -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+  <style>
+    /* 기본 레이아웃 및 폰트 설정 */
+    body { font-family: 'Noto Sans KR', sans-serif; margin:0; padding:0; background:#f0f4f8; color:#333; line-height:1.7; }
+    header, section, footer { max-width:900px; margin:20px auto; padding:25px; background:#ffffff; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.06); }
+    
+    /* 제목 스타일링 */
+    h1 { font-size:2.8rem; color:#0b3d91; margin-bottom:10px; text-align:center; }
+    h2 { font-size:2rem; color:#2c3e50; border-bottom:3px solid #a3c4ff; padding-bottom:10px; margin-top:30px; }
+    h3 { font-size:1.6rem; color:#34495e; margin-top:25px; }
+    h4 { font-size:1.3rem; color:#555; margin-top:20px; }
+
+    /* 텍스트 및 목록 스타일 */
+    p, li, dd, dt, table { font-size:1.05rem; }
+    ul, ol { padding-left:25px; }
+    li { margin-bottom:8px; }
+
+    /* 테이블 스타일 */
+    table { width:100%; border-collapse: separate; border-spacing: 0; margin:25px 0; border:1px solid #ccddee; border-radius:8px; overflow:hidden; }
+    th, td { padding:14px; text-align:left; border-bottom:1px solid #ccddee; }
+    th { background:#a3c4ff; color:#fff; font-weight:700; border-right:1px solid #90b8e9; }
+    td:last-child, th:last-child { border-right:none; }
+    tr:last-child td { border-bottom:none; }
+
+    /* CTA 버튼 스타일 */
+    .btn-cta {
+      display:inline-block;
+      padding:15px 35px;
+      background:#4285f4;
+      color:#fff;
+      font-weight:700;
+      border:none;
+      border-radius:30px;
+      box-shadow:0 6px 12px rgba(66, 133, 244, 0.4);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      cursor:pointer;
+      text-decoration:none;
+      text-align:center;
+      font-size:1.1rem;
+    }
+    .btn-cta:hover { background:#3367d6; transform:translateY(-2px); }
+    .btn-wrapper { text-align:center; margin-top:30px; }
+
+    /* 기타 요소 */
+    .anchor { display:block; position:relative; top:-100px; visibility:hidden; }
+    .highlight { background-color:#fff1c9; padding:10px; border-radius:6px; margin:15px 0; border-left:4px solid #f9a825; }
+    .color-box { padding:15px; border-radius:8px; margin:20px 0; }
+    .color-box.blue { background:#e8f0fe; border-left:5px solid #4285f4; }
+    .color-box.green { background:#e6f8e6; border-left:5px solid #3cba54; }
+    .nav-list { text-align:center; margin-bottom:20px; }
+    .nav-list ul { display:flex; flex-wrap:wrap; justify-content:center; padding-left:0; list-style-type:none; }
+    .nav-list li { margin:5px 10px; }
+    .nav-list a { padding:8px 15px; display:inline-block; border:1px solid #ddd; border-radius:20px; font-size:0.9rem; color:#555; transition:all 0.3s; }
+    .nav-list a:hover { background:#a3c4ff; color:#fff; border-color:#a3c4ff; }
+    
+    /* 입력 양식 스타일 개선 */
+    form { max-width:600px; margin:auto; padding:25px; background:#f9f9f9; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+    form label { display:block; font-weight:700; margin-top:15px; margin-bottom:5px; color:#2c3e50; }
+    form input[type="text"], form input[type="tel"], form select, form textarea {
+      width:calc(100% - 16px); padding:10px; margin-bottom:12px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box; font-size:1rem;
+    }
+    form select { appearance:none; background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; background-size:12px; }
+
+    /* 반응형 디자인 */
+    @media(max-width:600px) {
+      body { padding:10px; }
+      header, section, footer { margin:10px auto; padding:20px; }
+      h1 { font-size:2.2rem; }
+      h2 { font-size:1.8rem; }
+      h3 { font-size:1.4rem; }
+      .btn-cta { width:100%; padding:15px 0; font-size:1rem; }
+      .nav-list ul { flex-direction:column; align-items:center; }
+      .nav-list li { margin:5px 0; width:100%; text-align:center; }
+      .nav-list a { width:calc(100% - 30px); }
+      th, td { padding:10px; font-size:0.9rem; }
+      form input[type="text"], form input[type="tel"], form select, form textarea { font-size:0.9rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>20평대 이사 비용 비교 계산</h1>
+    <p>24평, 25평, 26평 아파트 이사 비용부터 체크리스트, 전국 업체 비교까지!</p>
+    <div class="btn-wrapper">
+      <a class="btn-cta" href="#contact">지금 20평대 이사 견적 비교하기</a>
+    </div>
+  </header>
+
+  <nav class="nav-list" aria-label="페이지 내 이동">
+    <ul>
+      <li><a href="#intro">20평대 이사란?</a></li>
+      <li><a href="#pricing">이사 비용 상세 분석</a></li>
+      <li><a href="#regional-price">전국 지역별 가격 비교</a></li>
+      <li><a href="#checklist">이사 체크리스트</a></li>
+      <li><a href="#faq">자주 묻는 질문</a></li>
+      <li><a href="#contact">견적 상담</a></li>
+    </ul>
+  </nav>
+
+  <section id="intro">
+    <span id="intro-anchor" class="anchor"></span>
+    <h2>20평대 이사, 왜 비용이 천차만별일까?</h2>
+    <p>20평대 아파트 이사는 1인 가구 원룸 이사나 30평대 이상 대형 평수 이사와는 다른 특징을 갖습니다. 일반적으로 24평부터 26평 사이의 공간을 말하며, 3~4인 가구가 거주하는 경우가 많아 짐의 양이 원룸이나 투룸보다 훨씬 많습니다. 따라서 이사 비용을 결정하는 요소가 복합적이며, 단순 비교만으로는 정확한 견적을 알기 어렵습니다.</p>
+    <p class="highlight">20평대 이사 비용을 결정하는 핵심 요소:</p>
+    <ol>
+      <li><strong>짐의 양과 특성:</strong> 20평대 이사는 짐의 양이 많아 5톤 트럭 1대 또는 5톤 트럭 + 1톤 트럭(용달) 혼합 구성이 일반적입니다. 짐의 무게나 부피가 많아질수록 비용이 증가합니다.</li>
+      <li><strong>이사 서비스 유형:</strong> 포장이사(풀서비스), 반포장이사, 일반이사 중 어떤 서비스를 선택하느냐에 따라 비용이 크게 달라집니다. 포장이사가 가장 비싸지만 편리합니다.</li>
+      <li><strong>이사 날짜와 시기:</strong> '손 없는 날'이나 주말, 2~3월의 이사 성수기는 이사 비용이 비싸집니다. 비수기 평일 이사를 선택하면 비용 절감이 가능합니다.</li>
+      <li><strong>이사 거리 및 환경:</strong> 이사하는 거리(단거리 vs 장거리)와 사다리차 사용 여부, 엘리베이터 유무 등 현장 조건이 중요합니다.</li>
+    </ol>
+    <p>본 페이지에서는 20평대 이사 비용의 구성 요소와 전국 주요 지역별 시세를 분석하여 합리적인 이사 계획을 세울 수 있도록 돕습니다.</p>
+  </section>
+
+  <section id="pricing">
+    <span id="pricing-anchor" class="anchor"></span>
+    <h2>20평대 포장이사 유형별 비용 분석 (2026년 기준)</h2>
+    <p>20평대 아파트 이사는 일반적으로 5톤 트럭 기준 포장이사 서비스를 많이 이용합니다. 짐의 양과 서비스 범위에 따라 비용이 달라지므로, 아래 표를 참고하여 이사 유형을 선택하는 것이 중요합니다.</p>
+
+    <h3>1. 20평대 이사 서비스 유형 및 예상 비용 (2026년 평균)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>이사 유형</th>
+          <th>서비스 범위</th>
+          <th>예상 비용 (평균)</th>
+          <th>추천 대상</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>포장이사 (Full Service)</strong></td>
+          <td>포장, 운반, 정리, 청소 (All-in-one)</td>
+          <td>₩1,100,000 ~ ₩1,800,000+</td>
+          <td>이사 당일 바쁘거나 짐이 많은 3~4인 가구</td>
+        </tr>
+        <tr>
+          <td><strong>반포장이사 (Semi-Packed)</strong></td>
+          <td>운반 및 큰 짐 포장/정리, 작은 짐 고객 포장</td>
+          <td>₩800,000 ~ ₩1,300,000</td>
+          <td>이사 비용 절감 원하나 기본적인 도움 필요한 경우</td>
+        </tr>
+        <tr>
+          <td><strong>일반이사 (General Moving)</strong></td>
+          <td>운반만 대행 (모든 포장/정리 고객 부담)</td>
+          <td>₩500,000 ~ ₩800,000</td>
+          <td>짐이 적고, 비용 절감이 가장 중요한 1인/2인 가구</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="color-box blue"><strong>참고:</strong> 위 비용은 평균적인 참고치이며, 이사 성수기(2~3월), 주말, 손 없는 날 등 특정 날짜에는 20~30% 할증이 붙을 수 있습니다. 또한, 사다리차 비용, 에어컨 설치비, 붙박이장 분해/조립비는 별도 청구될 수 있습니다.</p>
+
+    <h3>2. 20평대 아파트 이사 짐량에 따른 차량 크기 및 인력 구성</h3>
+    <p>20평대 아파트는 보통 3인 가족 짐이 기준이 됩니다. 짐이 많을 경우 5톤 트럭을 초과할 수도 있습니다. 이사 견적 시 정확한 짐량을 파악하는 것이 중요합니다.</p>
+    <ul>
+      <li><strong>24평/25평 짐량:</strong> 일반적으로 5톤 포장이사 트럭 1대 기준. 인력은 남자 2명, 여자 1명(총 3명) 또는 남자 2명으로 구성됩니다.</li>
+      <li><strong>짐량 초과 시:</strong> 짐이 매우 많거나 (26평 이상의 짐량) 대형 가구가 많을 경우 5톤 트럭 1.5대 분량으로 간주되어 5톤 + 1톤 차량이 추가될 수 있습니다.</li>
+      <li><strong>짐량 절감 팁:</strong> 이사 전 짐을 최대한 버리거나 중고로 판매하면 비용을 절감할 수 있습니다.</li>
+    </ul>
+  </section>
+
+  <section id="regional-price">
+    <span id="regional-price-anchor" class="anchor"></span>
+    <h2>전국 주요 지역별 20평대 포장이사 비용 비교 분석</h2>
+    <p>이사 비용은 지역별 물가와 수요에 따라 차이가 발생합니다. 특히 수도권은 이사업체가 밀집해 있어 경쟁이 치열한 반면, 제주도나 도서 산간 지역은 추가 비용이 발생할 수 있습니다. 2026년 기준으로 전국 주요 지역별 20평대 포장이사(5톤 기준)의 평균 시세를 분석했습니다.</p>
+    
+    <h3>1. 수도권 지역 (서울/경기/인천)</h3>
+    <p>수도권은 대한민국 인구의 절반 이상이 거주하는 지역으로, 이사 수요가 가장 많습니다. 서울특별시 이사 비용은 높은 인건비와 주차 문제로 인해 상대적으로 비싼 편입니다. 경기도 내에서도 성남, 용인, 평택, 고양, 수원 등 인구 밀집도가 높은 지역은 이사 수요가 많습니다.</p>
+    <ul>
+      <li><strong>서울 지역:</strong> 강남구, 서초구, 송파구, 강동구, 마포구, 영등포구 등 주요 지역의 20평대 이사 비용은 평균 시세보다 5~10% 높을 수 있습니다.</li>
+      <li><strong>경기 지역:</strong> 수원시, 용인시, 성남시, 고양시, 화성시, 평택시 등 인구가 많은 지역은 경쟁 업체가 많아 합리적인 가격 비교가 가능합니다.</li>
+      <li><strong>인천 지역:</strong> 송도, 청라, 영종 등 신도시는 아파트가 많아 이사 수요가 꾸준하며, 20평대 이사 비용은 서울보다 소폭 낮거나 비슷한 수준을 보입니다.</li>
+    </ul>
+
+    <h3>2. 지방 광역시 (부산/대구/대전/광주/울산)</h3>
+    <p>지방 광역시의 이사 비용은 수도권에 비해 상대적으로 저렴한 편입니다. 그러나 해운대, 수영구, 남구 등 특정 지역의 경우 수요가 높아 가격이 상승할 수 있습니다.</p>
+    <ul>
+      <li><strong>부산 지역:</strong> 해운대구, 수영구, 동래구 등 주거 선호도가 높은 지역은 20평대 이사 수요가 꾸준합니다.</li>
+      <li><strong>대구 지역:</strong> 수성구, 달서구, 동구 등 인구 밀집 지역의 이사 견적은 경쟁을 통해 형성됩니다.</li>
+      <li><strong>대전, 광주, 울산:</strong> 각 지역의 중심지 및 신도시(도안신도시, 봉선동, 울산혁신도시) 이사 비용은 평소 시세를 유지하는 경향이 있습니다.</li>
+    </ul>
+
+    <h3>3. 전국 주요 지역별 20평대 이사 비용 키워드 목록</h3>
+    <p>아래는 20평대 이사를 위해 전국에서 많이 찾는 지역별 키워드입니다. 해당 지역에서 20평대 이사 계획이 있다면 아래 키워드를 참고하여 이사 견적을 받아보세요.</p>
+    <div class="color-box green">
+      <h4>전국 이사 지역 키워드 (30개 이상)</h4>
+      <p>
+        서울 포장이사, 강남구 이사, 서초구 이사, 송파구 이사, 강동구 이사, 마포구 이사, 영등포구 이사, 용산구 이사, 성동구 이사, 광진구 이사, 노원구 이사, 은평구 이사, 양천구 이사, 강서구 이사, 구로구 이사, 금천구 이사, 도봉구 이사, 성북구 이사, 종로구 이사, 중구 이사, 동대문구 이사, 서대문구 이사, 중랑구 이사, 강북구 이사, 동작구 이사, 관악구 이사<br>
+        경기 포장이사, 수원 이사, 용인 이사, 성남 이사, 평택 이사, 고양 이사, 안양 이사, 의정부 이사, 파주 이사, 하남 이사, 김포 이사, 남양주 이사, 동탄 이사, 광명 이사, 시흥 이사, 안산 이사, 부천 이사, 광주 이사, 양주 이사, 구리 이사<br>
+        인천 포장이사, 송도 이사, 청라 이사, 영종도 이사, 부평 이사, 연수구 이사, 남동구 이사<br>
+        부산 포장이사, 해운대구 이사, 수영구 이사, 동래구 이사, 부산진구 이사, 금정구 이사, 연제구 이사<br>
+        대구 포장이사, 수성구 이사, 달서구 이사, 동구 이사, 서구 이사<br>
+        대전 포장이사, 유성구 이사, 서구 이사, 중구 이사<br>
+        광주 포장이사, 서구 이사, 광산구 이사, 남구 이사<br>
+        울산 포장이사, 남구 이사, 중구 이사<br>
+        세종 이사, 청주 이사, 천안 이사, 아산 이사, 원주 이사, 춘천 이사, 포항 이사, 구미 이사, 창원 이사, 진주 이사, 제주도 이사
+      </p>
+    </div>
+  </section>
+
+  <section id="checklist">
+    <span id="checklist-anchor" class="anchor"></span>
+    <h2>20평대 포장이사 완벽 대비 체크리스트 (2026년 업데이트)</h2>
+    <p>성공적인 20평대 이사를 위해서는 철저한 사전 준비가 필수입니다. 짐의 양이 많고 가전/가구가 복잡하게 얽혀 있어 체크리스트를 활용하면 실수를 줄일 수 있습니다.</p>
+    <div class="color-box blue">
+      <h3>이사 D-30일 (이사 1개월 전)</h3>
+      <ol>
+        <li><strong>이사 업체 선정 및 계약:</strong> 최소 3곳 이상 견적 비교 후 신뢰할 수 있는 업체 선정. 계약서에 추가 비용 항목(사다리차, 에어컨 설치비 등) 명확히 명시.</li>
+        <li><strong>이사 날짜 확정:</strong> 손 없는 날 또는 주말 등 수요가 많은 날은 미리 예약. 비수기 평일을 이용해 비용 절감 고려.</li>
+        <li><strong>가구 배치 계획:</strong> 새집의 가구 배치도를 미리 그려보고 불필요한 가구 정리.</li>
+        <li><strong>이사 유형 결정:</strong> 포장이사, 반포장이사 중 어떤 서비스를 이용할지 결정.</li>
+      </ol>
+    </div>
+
+    <div class="color-box green">
+      <h3>이사 D-14일 (이사 2주 전)</h3>
+      <ol>
+        <li><strong>불필요한 짐 정리:</strong> 입지 않는 옷, 안 쓰는 주방용품, 오래된 가구/가전 등 폐기물 처리 계획 수립. 폐기물 스티커 구매 또는 지자체 신고.</li>
+        <li><strong>이사 갈 집 관리비/공과금 정산:</strong> 이사 당일 정산이 가능하도록 준비 (전기, 가스, 수도, 인터넷 등).</li>
+        <li><strong>주소 변경 신고:</strong> 우체국 우편물 주소 이전 서비스, KT/SKT 등 통신사 주소 변경 신청.</li>
+        <li><strong>이사 갈 집 청소:</strong> 이사 전에 입주 청소 예약. (포장이사 업체 서비스와 별도)</li>
+      </ol>
+    </div>
+
+    <div class="color-box blue">
+      <h3>이사 D-7일 (이사 1주 전)</h3>
+      <ol>
+        <li><strong>귀중품/중요 서류 별도 보관:</strong> 현금, 통장, 인감, 신분증 등은 이삿짐에 섞이지 않도록 직접 챙길 가방 마련.</li>
+        <li><strong>냉장고 정리:</strong> 냉장고 내부 음식물 정리 및 해동, 물기 제거.</li>
+        <li><strong>가전 분해/설치 확인:</strong> 에어컨, 벽걸이TV, 붙박이장 등 이전 설치가 필요한 품목은 업체에 미리 고지.</li>
+        <li><strong>이웃에 알리기:</strong> 아파트 관리사무소에 이사 예정일 알리고 엘리베이터 사용 예약(필요 시).</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="faq">
+    <span id="faq-anchor" class="anchor"></span>
+    <h2>자주 묻는 질문 (FAQ)</h2>
+    <dl>
+      <dt>Q1: 20평대 이사 비용이 갑자기 추가될 수 있나요?</dt>
+      <dd>A: 네, 계약서에 명시되지 않은 추가 비용이 발생할 수 있습니다. 예를 들어, 이삿짐이 예상보다 많거나, 사다리차 사용이 불가하여 인력 추가 투입 시, 이사 중 가구/가전 분해·설치 시 추가 비용이 발생할 수 있습니다. 반드시 계약 전 구두 약속이 아닌 서면으로 추가 비용 항목을 명확히 하는 것이 중요합니다.</dd>
+      
+      <dt>Q2: 24평 아파트와 26평 아파트의 이사 비용 차이가 큰가요?</dt>
+      <dd>A: 평수 차이가 2평이지만, 짐의 양에 따라 비용 차이가 발생할 수 있습니다. 24평형 이사의 경우 5톤 트럭이 적합하지만, 26평형 이사에서 짐이 많을 경우 5톤 트럭 1.5대 분량으로 판단될 수 있습니다. 짐이 늘어날 경우 차량 및 인력이 추가되어 비용이 10~20% 증가할 수 있습니다.</dd>
+      
+      <dt>Q3: 이사 시기가 비용에 미치는 영향은 얼마나 큰가요?</dt>
+      <dd>A: 매우 큽니다. 특히 2~3월은 이사 성수기로 불리며, 주말이나 '손 없는 날'은 이사 비용이 비수기 평일 대비 30% 이상 증가할 수 있습니다. 비용 절감을 위해서는 비수기 평일 오전 이사를 추천합니다.</dd>
+      
+      <dt>Q4: 이사 업체 선정 시 가장 중요한 기준은 무엇인가요?</dt>
+      <dd>A: 단순히 최저가만 고집하는 것보다, 여러 업체의 견적을 비교하고 정식 허가 업체인지 확인해야 합니다. 특히 계약서에 파손 및 분실 시 보상 규정을 명확히 하고, 방문 견적을 통해 짐량을 정확히 파악하는 것이 중요합니다.</dd>
+    </dl>
+  </section>
+
+  <section id="trusted-sources">
+    <span id="trusted-sources-anchor" class="anchor"></span>
+    <h2>공신력 있는 정보 출처 및 관련 자료</h2>
+    <p>이사 서비스 관련 분쟁 발생 시 또는 이사 비용 산정 기준에 대한 객관적인 정보를 얻고자 할 때 아래 정부 기관 및 신뢰성 있는 웹사이트를 참고할 수 있습니다.</p>
+    <ul>
+      <li><a href="https://www.kca.go.kr/main.do" target="_blank">한국소비자원</a>: 이사 서비스 관련 소비자 불만 및 분쟁 해결 기준 안내.</li>
+      <li><a href="https://www.data.go.kr/index.do" target="_blank">공공데이터포털</a>: 이사 관련 통계 및 업체 정보 확인 가능.</li>
+      <li><a href="https://www.nso.go.kr/index.do" target="_blank">통계청</a>: 주거 및 가구 이동 관련 통계 자료.</li>
+      <li><a href="https://namu.wiki/w/%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC" target="_blank">나무위키</a>: 포장이사 서비스에 대한 일반적인 설명 및 용어 정의.</li>
+      <li><a href="https://www.law.go.kr/" target="_blank">국가법령정보센터</a>: 관련 법규 및 운송 약관 참고.</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <span id="contact-anchor" class="anchor"></span>
+    <h2>20평대 포장이사 맞춤 견적 상담 문의</h2>
+    <p>20평대 이사는 짐의 양, 이사 날짜, 서비스 유형 등 다양한 변수가 비용을 결정합니다. 정확한 견적을 위해 상세 정보를 입력해주시면 맞춤 상담을 제공해 드립니다. 견적 문의는 무료입니다.</p>
+    <form action="/submit" method="POST">
+      <label for="name">이름<span style="color:red;">*</span></label>
+      <input type="text" id="name" name="name" required placeholder="예: 홍길동" />
+
+      <label for="phone">연락처<span style="color:red;">*</span></label>
+      <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" pattern="[0-9\-]+" />
+
+      <label for="move-date">이사 희망 날짜<span style="color:red;">*</span></label>
+      <input type="date" id="move-date" name="move_date" required />
+
+      <label for="current-address">현재 거주지 주소 (출발지)</label>
+      <input type="text" id="current-address" name="current_address" placeholder="예: 경기도 평택시 비전동 24평 아파트" />
+
+      <label for="new-address">이사 갈 곳 주소 (도착지)</label>
+      <input type="text" id="new-address" name="new_address" placeholder="예: 서울특별시 강남구 역삼동 26평 아파트" />
+
+      <label for="move-size">이사 평수<span style="color:red;">*</span></label>
+      <select id="move-size" name="move_size" required>
+        <option value="">평수를 선택해주세요</option>
+        <option value="20평대 (24평)">20평대 (24평)</option>
+        <option value="20평대 (25평)">20평대 (25평)</option>
+        <option value="20평대 (26평)">20평대 (26평)</option>
+        <option value="기타">기타 (직접 입력)</option>
+      </select>
+      
+      <label for="move-type">이사 서비스 유형<span style="color:red;">*</span></label>
+      <select id="move-type" name="move_type" required>
+        <option value="">이사 유형을 선택하세요</option>
+        <option value="포장이사 (Full Service)">포장이사 (Full Service)</option>
+        <option value="반포장이사 (Semi-Packed)">반포장이사 (Semi-Packed)</option>
+        <option value="일반이사">일반이사</option>
+      </select>
+
+      <label for="floor-info">층수 정보 (출발지/도착지 층수 및 엘리베이터 유무)</label>
+      <input type="text" id="floor-info" name="floor_info" placeholder="예: 출발지 5층(엘리베이터O), 도착지 10층(엘리베이터O)" />
+
+      <label for="message">추가 요청 사항 및 특이사항</label>
+      <textarea id="message" name="message" rows="5" placeholder="예: 이사 짐이 많은 편입니다. 에어컨 분해/설치 필요. 짐 미리 버릴 예정입니다."></textarea>
+
+      <button type="submit" class="btn-cta">견적 문의 보내기</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2026 20평대 이사 비용 간편 조회 사이트. All rights reserved.</p>
+    <p>본 페이지의 내용은 2026년 이사 시장 상황을 바탕으로 작성되었으며, 실제 비용은 업체 및 상황에 따라 달라질 수 있습니다.</p>
+    <p>연락처: <a href="tel:0311234567">031‑123‑4567</a> | 이메일: <a href="mailto:help@domain.com">help@domain.com</a></p>
+  </footer>
+
